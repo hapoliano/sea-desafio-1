@@ -3,8 +3,6 @@ package br.com.sea.login.model.cliente;
 import br.com.sea.login.model.endereco.Endereco;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
 import java.util.List;
 
 @Table(name = "clientes")
@@ -12,16 +10,10 @@ import java.util.List;
 public class Cliente {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    @Column(name = "id", nullable = false)
     private Long id;
 
-    @NotBlank
-    @Size(min = 3, max = 100)
-    @Column
     private String nome;
 
-    @NotBlank
-    @Column(nullable = false, unique = true, length = 11)
     private String cpf;
 
     @ElementCollection
@@ -38,22 +30,15 @@ public class Cliente {
     @JoinColumn(name = "endereco_id", referencedColumnName = "id")
     private Endereco endereco;
 
-
-    public Cliente(String nome, String cpf, List<String> telefones, List<String> emails, Endereco endereco) {
-        this.nome = nome;
-        this.cpf = cpf;
-        this.telefones = telefones;
-        this.emails = emails;
-        this.endereco = endereco;
-    }
-
     public Cliente() {
-
     }
 
     public Cliente(ClienteDTO dto) {
         this.nome = dto.getNome();
         this.cpf = dto.getCpf();
+        this.telefones = dto.getTelefones();
+        this.emails = dto.getEmails();
+        this.endereco = new Endereco(dto.getEndereco());
     }
 
     public Long getId() {
