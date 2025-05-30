@@ -4,6 +4,7 @@ import br.com.sea.login.model.endereco.Endereco;
 
 import javax.persistence.*;
 import java.util.List;
+import java.util.Map;
 
 @Table(name = "clientes")
 @Entity(name = "Cliente")
@@ -18,8 +19,10 @@ public class Cliente {
 
     @ElementCollection
     @CollectionTable(name = "cliente_telefones", joinColumns = @JoinColumn(name = "cliente_id"))
+    @MapKeyEnumerated(EnumType.STRING)
+    @MapKeyColumn(name = "tipo")
     @Column(name = "telefone")
-    private List<String> telefones;
+    private Map<TipoTelefone, String> telefones;
 
     @ElementCollection
     @CollectionTable(name = "cliente_emails", joinColumns = @JoinColumn(name = "cliente_id"))
@@ -65,11 +68,11 @@ public class Cliente {
         this.cpf = cpf;
     }
 
-    public List<String> getTelefones() {
+    public Map<TipoTelefone, String> getTelefones() {
         return telefones;
     }
 
-    public void setTelefones(List<String> telefones) {
+    public void setTelefones(Map<TipoTelefone, String> telefones) {
         this.telefones = telefones;
     }
 

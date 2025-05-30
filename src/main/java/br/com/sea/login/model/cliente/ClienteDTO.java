@@ -2,28 +2,31 @@ package br.com.sea.login.model.cliente;
 
 import br.com.sea.login.model.endereco.EnderecoDTO;
 
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import javax.validation.Valid;
+import javax.validation.constraints.*;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 public class ClienteDTO {
 
     @NotBlank
     @Size(min = 3, max = 20)
+    @Pattern(regexp = "^[A-Za-z0-9À-ÿ ]+$")
     private String nome;
 
     @NotBlank
+    @Pattern(regexp = "\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}")
     private String cpf;
 
     @NotEmpty
-    private List<String> telefones;
+    private Map<TipoTelefone, String> telefones;
 
     @NotEmpty
-    private List<String> emails;
+    private List<@Email String> emails;
 
     @NotNull
+    @Valid
     private EnderecoDTO endereco;
 
     public String getNome() {
@@ -35,18 +38,22 @@ public class ClienteDTO {
     }
 
     public String getCpf() {
-        return cpf;
+        return cpf.replaceAll("\\D", "");
     }
 
     public void setCpf(String cpf) {
         this.cpf = cpf;
     }
 
-    public List<String> getTelefones() {
-        return telefones;
+    public @NotEmpty Map<TipoTelefone, String> getTelefones() {
+        return telefones.entrySet().stream()
+                .collect(Collectors.toMap(
+                        Map.Entry::getKey,
+                        entry -> entry.getValue().replaceAll("\\D", "")
+                ));
     }
 
-    public void setTelefones(List<String> telefones) {
+    public void setTelefones(@NotEmpty Map<TipoTelefone, String> telefones) {
         this.telefones = telefones;
     }
 

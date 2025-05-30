@@ -1,10 +1,12 @@
 package br.com.sea.login.model.endereco;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 
 public class EnderecoDTO {
 
     @NotBlank
+    @Pattern(regexp = "^\\d{5}-\\d{3}$")
     private String cep;
     @NotBlank
     private String logradouro;

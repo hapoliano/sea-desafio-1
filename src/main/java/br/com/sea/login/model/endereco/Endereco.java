@@ -31,6 +31,9 @@ public class Endereco {
         this.complemento = enderecoDTO.getComplemento();
     }
 
+    public Endereco() {
+    }
+
     public Long getId() {
         return id;
     }
