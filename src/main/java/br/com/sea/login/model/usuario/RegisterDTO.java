@@ -1,6 +1,7 @@
 package br.com.sea.login.model.usuario;
 
 public class RegisterDTO {
+
     private String login;
     private String password;
     private UserRole role;

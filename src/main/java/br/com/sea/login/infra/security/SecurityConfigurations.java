@@ -30,6 +30,7 @@ public class SecurityConfigurations {
                         .antMatchers(HttpMethod.POST, "/auth/login").permitAll()
                         .antMatchers(HttpMethod.POST, "/auth/registrar").permitAll()
                         .antMatchers(HttpMethod.POST, "/clientes/cadastrar").hasRole("ADMIN")
+                        .antMatchers("/v3/api-docs/**", "/swagger-ui.html", "/swagger-ui/**").permitAll()
                         .anyRequest().authenticated())
                 .addFilterBefore(securityFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();

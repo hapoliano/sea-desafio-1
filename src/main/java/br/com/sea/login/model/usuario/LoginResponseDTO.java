@@ -1,6 +1,7 @@
 package br.com.sea.login.model.usuario;
 
 public class LoginResponseDTO {
+
     private String token;
 
     public LoginResponseDTO(String token) {

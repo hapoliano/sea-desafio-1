@@ -11,15 +11,13 @@ import java.util.Collection;
 @Table(name=  "usuarios")
 @Entity(name = "usuarios")
 public class Usuario implements UserDetails {
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
     private Long id;
-
     private String login;
-
     private String senha;
-
     private UserRole role;
 
     public Usuario() {}
@@ -29,7 +27,6 @@ public class Usuario implements UserDetails {
         this.senha = senha;
         this.role = role;
     }
-
 
     public Long getId() {
         return id;

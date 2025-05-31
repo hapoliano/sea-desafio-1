@@ -19,7 +19,6 @@ public class SecurityFilter extends OncePerRequestFilter {
 
     @Autowired
     TokenService tokenService;
-
     @Autowired
     UsuarioRepository usuarioRepository;
 
@@ -43,5 +42,4 @@ public class SecurityFilter extends OncePerRequestFilter {
         }
         return authHeader.replace("Bearer ", "");
     }
-
 }

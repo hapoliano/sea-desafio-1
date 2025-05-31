@@ -9,26 +9,22 @@ import java.util.Map;
 @Table(name = "clientes")
 @Entity(name = "Cliente")
 public class Cliente {
+
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
-
     private String nome;
-
     private String cpf;
-
     @ElementCollection
     @CollectionTable(name = "cliente_telefones", joinColumns = @JoinColumn(name = "cliente_id"))
     @MapKeyEnumerated(EnumType.STRING)
     @MapKeyColumn(name = "tipo")
     @Column(name = "telefone")
     private Map<TipoTelefone, String> telefones;
-
     @ElementCollection
     @CollectionTable(name = "cliente_emails", joinColumns = @JoinColumn(name = "cliente_id"))
     @Column(name = "email")
     private List<String> emails;
-
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "endereco_id", referencedColumnName = "id")
     private Endereco endereco;

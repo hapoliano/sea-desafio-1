@@ -3,7 +3,6 @@ package br.com.sea.login.model.usuario;
 public class AuthenticatioDTO {
 
     private String login;
-
     private String password;
 
     public AuthenticatioDTO() {}

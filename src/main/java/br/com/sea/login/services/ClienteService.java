@@ -24,8 +24,7 @@ public class ClienteService {
     public List<ClienteDTO> listarTodos() {
         return repository.findAll()
                 .stream()
-                .map(ClienteDTO::from)
+                .map(ClienteDTO::new)
                 .collect(Collectors.toList());
     }
-
 }
