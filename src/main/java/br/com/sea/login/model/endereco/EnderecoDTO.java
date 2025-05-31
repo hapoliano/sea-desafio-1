@@ -18,6 +18,17 @@ public class EnderecoDTO {
     private String uf;
     private String complemento;
 
+    public EnderecoDTO() {}
+
+    public EnderecoDTO(Endereco endereco) {
+        this.cep = endereco.getCep();
+        this.logradouro = endereco.getLogradouro();
+        this.bairro = endereco.getBairro();
+        this.cidade = endereco.getCidade();
+        this.uf = endereco.getUf();
+        this.complemento = endereco.getComplemento();
+    }
+
     public @NotBlank String getCep() {
         return cep;
     }

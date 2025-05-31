@@ -29,6 +29,18 @@ public class ClienteDTO {
     @Valid
     private EnderecoDTO endereco;
 
+    public static ClienteDTO from(Cliente cliente) {
+        ClienteDTO dto = new ClienteDTO();
+        dto.setNome(cliente.getNome());
+        dto.setCpf(cliente.getCpf());
+        dto.setTelefones(cliente.getTelefones());
+        dto.setEmails(cliente.getEmails());
+        dto.setEndereco(new EnderecoDTO(cliente.getEndereco())); // Ajuste conforme necessário
+        return dto;
+    }
+
+
+
     public String getNome() {
         return nome;
     }
