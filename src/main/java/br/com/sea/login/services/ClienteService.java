@@ -1,5 +1,8 @@
-package br.com.sea.login.model.cliente;
+package br.com.sea.login.services;
 
+import br.com.sea.login.model.cliente.Cliente;
+import br.com.sea.login.model.cliente.ClienteDTO;
+import br.com.sea.login.repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

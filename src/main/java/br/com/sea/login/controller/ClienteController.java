@@ -1,7 +1,7 @@
 package br.com.sea.login.controller;
 
 import br.com.sea.login.model.cliente.ClienteDTO;
-import br.com.sea.login.model.cliente.ClienteService;
+import br.com.sea.login.services.ClienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
