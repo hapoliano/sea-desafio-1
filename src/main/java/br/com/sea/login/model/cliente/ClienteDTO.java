@@ -1,6 +1,7 @@
 package br.com.sea.login.model.cliente;
 
 import br.com.sea.login.model.endereco.EnderecoDTO;
+import io.swagger.v3.oas.annotations.media.Schema;
 
 import javax.validation.Valid;
 import javax.validation.constraints.*;
@@ -17,8 +18,10 @@ public class ClienteDTO {
     @NotBlank
     @Pattern(regexp = "\\d{3}\\.\\d{3}\\.\\d{3}-\\d{2}")
     private String cpf;
+    @Schema(description = "Lista de telefones do cliente com tipo e número", example = "{\"CELULAR\": \"11999999999\", \"RESIDENCIAL\": \"1122223333\", \"COMERCIAL\": \"1133334444\"}")
     @NotEmpty
     private Map<TipoTelefone, String> telefones;
+    @Schema(description = "Lista de emails do cliente")
     @NotEmpty
     private List<@Email String> emails;
     @NotNull

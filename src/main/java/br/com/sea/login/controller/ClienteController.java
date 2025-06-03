@@ -3,6 +3,8 @@ package br.com.sea.login.controller;
 import br.com.sea.login.model.cliente.ClienteDTO;
 import br.com.sea.login.services.ClienteService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,6 +27,11 @@ public class ClienteController {
     @Transactional
     @PostMapping("/cadastrar")
     @Operation(description = "endpoint para cadastrar um cliente.")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Cliente cadastrado com sucesso"),
+            @ApiResponse(responseCode = "400", description = "Dados inválidos"),
+            @ApiResponse(responseCode = "500", description = "Erro interno no servidor")
+    })
     public ResponseEntity<Void> cadastrar(@RequestBody @Valid ClienteDTO dados ) {
         clienteService.registrarConta(dados);
         return ResponseEntity.ok().build();
@@ -32,6 +39,10 @@ public class ClienteController {
 
     @Operation(description = "endpoint para listagem de todos os clientes.")
     @GetMapping("/listar")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Lista de clientes retornada com sucesso"),
+            @ApiResponse(responseCode = "500", description = "Erro interno no servidor")
+    })
     public ResponseEntity<List<ClienteDTO>> listarClientes() {
         List<ClienteDTO> clientes = clienteService.listarTodos();
         return ResponseEntity.ok(clientes);
