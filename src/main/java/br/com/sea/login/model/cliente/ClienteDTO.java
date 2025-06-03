@@ -25,6 +25,8 @@ public class ClienteDTO {
     @Valid
     private EnderecoDTO endereco;
 
+    public ClienteDTO(){}
+
     public ClienteDTO(Cliente cliente) {
         this.nome = cliente.getNome();
         this.cpf = cliente.getCpf();

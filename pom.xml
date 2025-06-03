@@ -10,24 +10,13 @@
 	</parent>
 	<groupId>br.com.sea</groupId>
 	<artifactId>login</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<name>login</name>
-	<description>Demo project for Spring Boot</description>
-	<url/>
-	<licenses>
-		<license/>
-	</licenses>
-	<developers>
-		<developer/>
-	</developers>
-	<scm>
-		<connection/>
-		<developerConnection/>
-		<tag/>
-		<url/>
-	</scm>
+	<version>0.1.0.1</version>
+	<name>SIDBD</name>
+	<description>Sistema desafio backend</description>
 	<properties>
 		<java.version>1.8</java.version>
+		<java.jwt.version>4.4.0</java.jwt.version>
+		<springdoc.version>1.6.14</springdoc.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -58,11 +47,6 @@
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-jpa</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-validation</artifactId>
 		</dependency>
 
@@ -80,13 +64,13 @@
 		<dependency>
 			<groupId>com.auth0</groupId>
 			<artifactId>java-jwt</artifactId>
-			<version>4.4.0</version>
+			<version>${java.jwt.version}</version>
 		</dependency>
 
 		<dependency>
 			<groupId>org.springdoc</groupId>
 			<artifactId>springdoc-openapi-ui</artifactId>
-			<version>1.6.14</version>
+			<version>${springdoc.version}</version>
 		</dependency>
 
 	</dependencies>

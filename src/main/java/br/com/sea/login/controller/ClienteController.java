@@ -1,33 +1,38 @@
 package br.com.sea.login.controller;
 
 import br.com.sea.login.model.cliente.ClienteDTO;
-import br.com.sea.login.repository.ClienteRepository;
 import br.com.sea.login.services.ClienteService;
-import org.springframework.beans.factory.annotation.Autowired;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("clientes")
+@Tag(name = "Clientes", description = "APIs para o cadastrado e a listagem clientes")
 public class ClienteController {
 
-    @Autowired
-    private ClienteService clienteService;
+    private final ClienteService clienteService;
 
-    @PostMapping("/cadastrar")
+    public ClienteController(ClienteService clienteService) {
+        this.clienteService = clienteService;
+    }
+
     @Transactional
-    public ResponseEntity cadastrar(@RequestBody @Valid ClienteDTO dados ) {
+    @PostMapping("/cadastrar")
+    @Operation(description = "endpoint para cadastrar um cliente.")
+    public ResponseEntity<Void> cadastrar(@RequestBody @Valid ClienteDTO dados ) {
         clienteService.registrarConta(dados);
         return ResponseEntity.ok().build();
     }
 
+    @Operation(description = "endpoint para listagem de todos os clientes.")
     @GetMapping("/listar")
-    public ResponseEntity listarClientes() {
+    public ResponseEntity<List<ClienteDTO>> listarClientes() {
         List<ClienteDTO> clientes = clienteService.listarTodos();
         return ResponseEntity.ok(clientes);
     }

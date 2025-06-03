@@ -6,7 +6,6 @@ import br.com.sea.login.model.usuario.LoginResponseDTO;
 import br.com.sea.login.model.usuario.RegisterDTO;
 import br.com.sea.login.model.usuario.Usuario;
 import br.com.sea.login.repository.UsuarioRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -23,15 +22,20 @@ import javax.validation.Valid;
 @RequestMapping("auth")
 public class AuthenticationController {
 
-    @Autowired
-    private AuthenticationManager authenticationManager;
-    @Autowired
-    private UsuarioRepository usuarioRepository;
-    @Autowired
-    private TokenService tokenService;
+    private final AuthenticationManager authenticationManager;
+
+    private final UsuarioRepository usuarioRepository;
+
+    private final TokenService tokenService;
+
+    public AuthenticationController(AuthenticationManager authenticationManager, UsuarioRepository usuarioRepository, TokenService tokenService) {
+        this.authenticationManager = authenticationManager;
+        this.usuarioRepository = usuarioRepository;
+        this.tokenService = tokenService;
+    }
 
     @PostMapping("/login")
-    public ResponseEntity login(@RequestBody @Valid AuthenticatioDTO data) {
+    public ResponseEntity<LoginResponseDTO> login(@RequestBody @Valid AuthenticatioDTO data) {
         UsernamePasswordAuthenticationToken usernamePassword = new UsernamePasswordAuthenticationToken(data.getLogin(), data.getPassword());
         Authentication auth = this.authenticationManager.authenticate(usernamePassword);
 
@@ -41,7 +45,7 @@ public class AuthenticationController {
     }
 
     @PostMapping("/registrar")
-    public ResponseEntity registrar(@RequestBody @Valid RegisterDTO data) {
+    public ResponseEntity<Void> registrar(@RequestBody @Valid RegisterDTO data) {
         if(this.usuarioRepository.findByLogin(data.getLogin()) != null) {
             return ResponseEntity.badRequest().build();
         }
